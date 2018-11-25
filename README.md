@@ -23,3 +23,5 @@
   
   * En fonction du nombre d’erreurs, l’application devra s’initialiser avec un temps maximum autorisé afin de les trouver.
   
+  * on va générer un module de musique de fond et musique lors d'un clique.
+  
