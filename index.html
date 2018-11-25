@@ -5,31 +5,36 @@
 	<title>Jeu des différences</title>
 	<link rel="stylesheet" type="text/css" href="css.css">
 </head>
-gfdgsfgsds
 
-sdfg
-
-totototototto
-tatata
 <body>
 	<div id="boxInfos" align="right" class="c_infos fixed" hidden>
 		<label id="nom" class="infos"></label>
 		<label id="infos" class="infos"></label>
 		<label id="temps" class="infos"></label>
 	</div>
-<p>Ma modif</p>
+
 	<form id="formulaire" method="get">
 		<div align="center" id="divFormulaire">
 			<h1> Jeu des différences </h1>
 		<table>	
 		<tr>
 		<td>
-		<label class="labelChamps"> Nom : </label>
+          <label class="labelChamps"> Nom : <span>*</span></td> <td><input id="txtNom" type="text">  </label>
+
 		</td>
-		<td>
-			<span>*</span><input id="txtNom" type="text">
-		</br>
-		</td>
+		
+		
+	</tr>
+	
+			<tr>
+			<td>
+			<label class="labelChamps"> Niveaux : </label></td>
+		<td> <select id="niveau">
+			<option value="niveau1">Niveau 1</option>
+			  <option value="niveau2">Niveau 2</option>
+			  <option value="niveau3">Niveau 3</option>
+		  </select></td>
+		  <br><br>
 		</tr>
 
 		<tr>
@@ -39,19 +44,23 @@ tatata
 			<span>*</span> <label id="labelObligation"> : Champs obligatoires ! </label>
 			<br>
 			<br>
-		<input type="button" id="start" value="Démarrer le jeu !">
+			<input type="button" id="start" value="Démarrer le jeu !">
 		</td>
 		</tr>
+		
 		</table>
-	    </div>
-	</form>
-
-		<div id="SVG" align="center">	
-		</div>
 		
 
-<script type="text/javascript" src="js.js">
+
+	<div id="SVG" align="center">	
+	</div>
+	    </div>
+	
+		
+
+<script type="text/javascript" src="js.js"></script>
 </script>
+
 </body>
 
 </html>
