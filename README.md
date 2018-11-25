@@ -9,7 +9,7 @@
 
 ## Nom du projet
 
-  ## Jeu des différences
+  ##### Jeu des différences
 
 ## Description
 
