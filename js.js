@@ -18,6 +18,7 @@ differences = function () {
   var erreursTrouvées;
   index = 0;
   temps = 0;
+  score = 0;
 
   //fonction myRandom qui nous servira lors de la création des figures 
   //cela aura un impact sur leurs attributs 
@@ -192,6 +193,9 @@ differences = function () {
       this.erreur = 0;
       // Si l'utilisateur trouve la forme faussée, celle-ci disparait
       svg1.removeChild(this);
+      // score
+      differences.score += 1;
+      document.getElementById('score').innerHTML = "<br>Score : " + differences.score +"<br>";
     }
   }
 
@@ -236,6 +240,8 @@ differences = function () {
     
     genererSVG: function () {
      
+      differences.score = 0;
+      
       level();
       intervalID = window.setInterval(arreter, 1000);
 
