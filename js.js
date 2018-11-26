@@ -30,6 +30,9 @@ differences = function () {
 
   //fonction qui genere une forme polygonale
   function genererPolygone() {
+
+    opacity = myRandom(10,100)/100;
+
     //Creation d'un polygone créé à partir d'un script en ligne situé sur le site w3.org
     polygone = document.createElementNS("http://www.w3.org/2000/svg", 'polygon');
 
@@ -39,6 +42,7 @@ differences = function () {
     polygone.setAttribute("stroke-width", myRandom(1, 3));
     polygone.setAttribute("fill", "rgb(" + myRandom(0, 255) + "," + myRandom(0, 255) + "," + myRandom(0, 255) + ")");
     polygone.setAttribute("position", index);
+    polygone.setAttribute("fill-opacity", opacity);
     return polygone;
 
   }
@@ -46,6 +50,9 @@ differences = function () {
   //ELLIPSE
 
   function genererEllipse() {
+
+    opacity = myRandom(10,100)/100;
+
     ellipse = document.createElementNS("http://www.w3.org/2000/svg", 'ellipse');
     ellipse.setAttribute("cx", myRandom(1, 400));
     ellipse.setAttribute("cy", myRandom(1, 400));
@@ -55,12 +62,16 @@ differences = function () {
     ellipse.setAttribute("stroke-width", myRandom(1, 3));
     ellipse.setAttribute("fill", "rgb(" + myRandom(0, 255) + "," + myRandom(0, 255) + "," + myRandom(0, 255) + ")");
     ellipse.setAttribute("position", index);
+    ellipse.setAttribute("fill-opacity", opacity);
     return ellipse;
   }
 
   //CERCLE
 
   function genererCercle() {
+
+    opacity = myRandom(10,100)/100;
+
     cercle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
     cercle.setAttribute("cx", myRandom(0, 400));
     cercle.setAttribute("cy", myRandom(1, 400));
@@ -69,12 +80,16 @@ differences = function () {
     cercle.setAttribute("stroke-width", myRandom(1, 3));
     cercle.setAttribute("fill", "rgb(" + myRandom(0, 255) + "," + myRandom(0, 255) + "," + myRandom(0, 255) + ")");
     cercle.setAttribute("position", index);
+    cercle.setAttribute("fill-opacity", opacity);
     return cercle;
   }
 
   //RECTANGLE
 
   function genererRect() {
+
+    opacity = myRandom(10,100)/100;
+
     rect = document.createElementNS("http://www.w3.org/2000/svg", 'rect');
     rect.setAttribute("x", myRandom(0, 400));
     rect.setAttribute("y", myRandom(0, 400));
@@ -84,12 +99,16 @@ differences = function () {
     rect.setAttribute("stroke-width", myRandom(1, 3));
     rect.setAttribute("fill", "rgb(" + myRandom(0, 255) + "," + myRandom(0, 255) + "," + myRandom(0, 255) + ")");
     rect.setAttribute("position", index);
+    rect.setAttribute("fill-opacity", opacity);
     return rect;
   }
 
   //LIGNE
 
   function genererLine() {
+
+    opacity = myRandom(10,100)/100;
+
     line = document.createElementNS("http://www.w3.org/2000/svg", 'line');
     line.setAttribute("x1", myRandom(0, 400));
     line.setAttribute("y1", myRandom(0, 400));
@@ -99,6 +118,7 @@ differences = function () {
     line.setAttribute("stroke-width", myRandom(1, 3));
     line.setAttribute("fill", "rgb(" + myRandom(0, 255) + "," + myRandom(0, 255) + "," + myRandom(0, 255) + ")");
     line.setAttribute("position", index);
+    line.setAttribute("fill-opacity", opacity);
     return line;
   }
 
