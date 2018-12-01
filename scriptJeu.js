@@ -1,18 +1,13 @@
 differences = function () {
 
-  //appel des fonctions créées 
-  figuresSVG = [genererRect, genererCercle, genererLine, genererEllipse, genererPolygone];
-
   //style des figures
   couleurs = ["red", "green", "blue"];
   style = ["fill", "width", "height", "stroke", "stroke-width"];
-  formes = ['circle', 'rect', 'line', 'ellipse', 'polygon']; 
               
 
   // initialise nb erreur nb elements
   nbrErreurs = 5;
   nbrElements = 10;
-
 
   
   var erreursTrouvées;
@@ -20,21 +15,20 @@ differences = function () {
   temps = 0;
   score = 0;
 
-  //fonction myRandom qui nous servira lors de la création des figures 
-  //cela aura un impact sur leurs attributs 
+  //fonction sert lors de la création des figures  
   function myRandom(min, max) {
     return Math.round(Math.random() * 1000000000) % (max - min + 1) + min;
   }
 
-  //POLYGONE
 
-  //fonction qui genere une forme polygonale
-  function genererPolygone() {
+  //classe qui genere un Polygone
+  class Polygone {
+    constructor(){
 
-    opacity = myRandom(10,100)/100;
+    var opacity = myRandom(10,100)/100;
 
     //Creation d'un polygone créé à partir d'un script en ligne situé sur le site w3.org
-    polygone = document.createElementNS("http://www.w3.org/2000/svg", 'polygon');
+    var polygone = document.createElementNS("http://www.w3.org/2000/svg", 'polygon');
 
     //Modification des attributs à partir de la fonction myRandom expliquée plus haut
     polygone.setAttribute("points", myRandom(1, 400) + "," + myRandom(1, 200) + " " + myRandom(1, 400) + "," + myRandom(1, 200) + " " + myRandom(1, 400) + "," + myRandom(1, 200));
@@ -44,16 +38,17 @@ differences = function () {
     polygone.setAttribute("position", index);
     polygone.setAttribute("fill-opacity", opacity);
     return polygone;
-
+  }
   }
 
-  //ELLIPSE
 
-  function genererEllipse() {
+  //classe qui genere l'Ellipse
+  class Ellipse {
+    constructor(){
 
-    opacity = myRandom(10,100)/100;
+    var opacity = myRandom(10,100)/100;
 
-    ellipse = document.createElementNS("http://www.w3.org/2000/svg", 'ellipse');
+    var ellipse = document.createElementNS("http://www.w3.org/2000/svg", 'ellipse');
     ellipse.setAttribute("cx", myRandom(1, 400));
     ellipse.setAttribute("cy", myRandom(1, 400));
     ellipse.setAttribute("rx", myRandom(1, 100));
@@ -65,14 +60,16 @@ differences = function () {
     ellipse.setAttribute("fill-opacity", opacity);
     return ellipse;
   }
+  }
 
-  //CERCLE
 
-  function genererCercle() {
+  //classe qui genere une Cercle
+  class Cercle {
 
-    opacity = myRandom(10,100)/100;
+    constructor(){
+    var opacity = myRandom(10,100)/100;
 
-    cercle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
+    var cercle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
     cercle.setAttribute("cx", myRandom(0, 400));
     cercle.setAttribute("cy", myRandom(1, 400));
     cercle.setAttribute("r", myRandom(1, 100));
@@ -83,14 +80,15 @@ differences = function () {
     cercle.setAttribute("fill-opacity", opacity);
     return cercle;
   }
+  }
 
-  //RECTANGLE
+  //classe qui genere un Rectangle
+  class Rectangle {
+    constructor()
+{
+    var opacity = myRandom(10,100)/100;
 
-  function genererRect() {
-
-    opacity = myRandom(10,100)/100;
-
-    rect = document.createElementNS("http://www.w3.org/2000/svg", 'rect');
+    var rect = document.createElementNS("http://www.w3.org/2000/svg", 'rect');
     rect.setAttribute("x", myRandom(0, 400));
     rect.setAttribute("y", myRandom(0, 400));
     rect.setAttribute("width", myRandom(10, 50));
@@ -102,14 +100,16 @@ differences = function () {
     rect.setAttribute("fill-opacity", opacity);
     return rect;
   }
+  }
 
-  //LIGNE
+  //classe qui genere une Ligne
+  class Line {
 
-  function genererLine() {
+    constructor(){
 
-    opacity = myRandom(10,100)/100;
+    var opacity = myRandom(10,100)/100;
 
-    line = document.createElementNS("http://www.w3.org/2000/svg", 'line');
+    var line = document.createElementNS("http://www.w3.org/2000/svg", 'line');
     line.setAttribute("x1", myRandom(0, 400));
     line.setAttribute("y1", myRandom(0, 400));
     line.setAttribute("x2", myRandom(0, 400));
@@ -121,12 +121,20 @@ differences = function () {
     line.setAttribute("fill-opacity", opacity);
     return line;
   }
+  }
 
-  //genere les elements à partir du tableau figureSVG
+
+  //generation des elements
 
   function genererElements() {
+
     for (i = 0; i < differences.nbrElements; i++) {
-      svg.appendChild(figuresSVG[myRandom(0, 4)]());
+
+      // declaration des objets de la classe dans un tableau afin de les generer aleatoirement
+      figuresSVG = [new Rectangle(), new Cercle(), new Line(), new Ellipse(), new Polygone()];
+
+      // generation des objets aleatoirement
+      svg.appendChild(figuresSVG[myRandom(0, 4)]);
       index += 1;
     }
     document.getElementById("SVG").appendChild(svg);
@@ -134,9 +142,8 @@ differences = function () {
 
   //MODIFIER()
   //fonction qui sera utilisé lors du clonage afin de modifier les formes créées 
-  //on modifie les attributs (couleur,position,largeur...)
-
   function modifier() {
+
     if (f.tagName == "line") {
       f.setAttribute("stroke", couleurs[myRandom(0, 2)]);
       f.setAttribute("x2", myRandom(0, 400));
@@ -161,18 +168,16 @@ differences = function () {
       f.setAttribute("fill", "rgb(" + myRandom(0, 255) + "," + myRandom(0, 255) + "," + myRandom(0, 255) + ")");
     }
 
-    if (f.tagName == "polygone") {
+    if (f.tagName == "polygon") {
       f.setAttribute("stroke", couleurs[myRandom(0, 2)]);
       f.setAttribute("fill", "rgb(" + myRandom(0, 255) + "," + myRandom(0, 255) + "," + myRandom(0, 255) + ")");
     }
   }
 
   //DUPLIQUER()
-  //On clone les premières formes créées puis on applique la méthode modifier
-  //Puis on permet à l'utilisateur par un double click de sélectionner l'erreur
-
-
+  //On clone les formes créées puis on applique la méthode modifier
   function dupliquer() {
+
     svg1 = svg.cloneNode(true);
 
     for (i = 0; i < differences.nbrErreurs; i++) {
@@ -185,6 +190,7 @@ differences = function () {
 
       differences.erreursTrouvées = 0;
 
+      //Permet à l'utilisateur par un double click de sélectionner l'erreur
       f.addEventListener("dblclick", vérifierErr, true);
 
       continue;
