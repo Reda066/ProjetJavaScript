@@ -27,6 +27,8 @@
   
   * module pour générer la musique de fond et lors d'un clique.
   
+  * module de fin de partie affichant les erreurs si le joueur ne les a pas trouvés
+  
 ## Comment Jouer ?
 
   * L'utilisateur doit trouver les formes différentes dans la deuxieme interface à droite, et il clique deux fois là dessus pour la supprimer et incrémenter le scrore
