@@ -3,7 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Jeu des différences</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet"  href="css/style.css">
+	<script src="lib/howler.min.js"></script>
 </head>
 
 <body>
@@ -55,12 +56,23 @@
 
 	<div id="SVG" align="center">	
 	</div>
-	    </div>
-	
+		</div>
 		
 
-<script type="text/javascript" src="scriptJeu.js"></script>
-</script>
+
+		
+		<audio id="audio" src="http://www.soundjay.com/button/beep-07.wav" autoplay="false" ></audio>
+		<a onclick="playSound();"> start  </a>
+		<script>
+		function playSound() {
+			  var sound = document.getElementById("audio");
+			  sound.play();
+		  }
+		</script>
+
+
+
+<script src="js/scriptJeu.js"></script>
 
 </body>
 
