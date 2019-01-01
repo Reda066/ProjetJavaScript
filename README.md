@@ -31,5 +31,5 @@
   
 ## Comment Jouer ?
 
-  * L'utilisateur doit trouver les formes différentes dans la deuxieme interface à droite, et il clique deux fois là dessus pour la supprimer et incrémenter le scrore
+  * L'utilisateur doit trouver les formes différentes dans la deuxieme interface à droite, et il clique là dessus pour la supprimer et incrémenter le scrore
   
