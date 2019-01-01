@@ -1,79 +1,58 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<meta charset="UTF-8">
 	<title>Jeu des différences</title>
-	<link rel="stylesheet"  href="css/style.css">
+	<link rel="stylesheet" href="css/style.css">
 	<script src="lib/howler.min.js"></script>
+
 </head>
 
 <body>
-	<div id="boxInfos" align="right" class="c_infos fixed" hidden>
-		<label id="nom" class="infos"></label>
-		<label id="infos" class="infos"></label>
-		<label id="temps" class="infos"></label>
-		<label id="score" class="infos"></label>
-	</div>
+	<div class="topnav" id="boxInfos">
+		<span id="nom" class="label label-primary"></span>
+		<span id="infos" class="label label-primary"></span>
+		<span id="temps" class="label label-primary"></span>
+		<span id="score" class="label label-primary"></span>
+	</div> <br>
 
-	<form id="formulaire" method="get">
-		<div align="center" id="divFormulaire">
+	<div class="content" id="divForm" align="center">
+		<form id="formulaire" method="get">
 			<h1> Jeu des différences</h1>
-		<table>	
-		<tr>
-		<td>
-          <label class="labelChamps"> Nom : <span>*</span></td> <td><input id="txtNom" type="text">  </label>
-
-		</td>
-		
-		
-	</tr>
-	
-			<tr>
-			<td>
-			<label class="labelChamps"> Niveaux : </label></td>
-		<td> <select id="niveau">
-			<option value="niveau1">Niveau 1</option>
-			  <option value="niveau2">Niveau 2</option>
-			  <option value="niveau3">Niveau 3</option>
-		  </select></td>
-		  <br><br>
-		</tr>
-
-		<tr>
-		<td>
-			</br>
-			</br>
-			<span>*</span> <label id="labelObligation"> : Champs obligatoires ! </label>
-			<br>
-			<br>
-			<input type="button" id="start" value="Démarrer le jeu !">
-		</td>
-		</tr>
-		
-		</table>
-		
-
-
-	<div id="SVG" align="center">	
+			<table>
+				<tr>
+					<td><label>Nom :<span>*</span></label></td>
+					<td><input type="text" id="txtNom" placeholder="Saisir votre nom"></br></td>
+				</tr>
+				<tr>
+					<td><label>Niveaux :</label></td>
+					<td><select id="niveau">
+							<option value="niveau1">Niveau 1</option>
+							<option value="niveau2">Niveau 2</option>
+							<option value="niveau3">Niveau 3</option>
+						</select></td>
+				</tr>
+			</table>
+			<br><span>*</span> : Champs obligatoires ! <br><br>
+			<button type="button" id="start"> Démarrer le jeu ! </button> <br><br>
+		</form>
 	</div>
-		</div>
-		
 
 
-		
-		<audio id="audio" src="http://www.soundjay.com/button/beep-07.wav" autoplay="false" ></audio>
-		<a onclick="playSound();"> start  </a>
-		<script>
+	<div id="SVG" align="center">
+	</div>
+
+	<audio id="audio" src="http://www.soundjay.com/button/beep-07.wav" autoplay="false"></audio>
+	<a onclick="playSound();"> start </a>
+	<script>
 		function playSound() {
-			  var sound = document.getElementById("audio");
-			  sound.play();
-		  }
-		</script>
+			var sound = document.getElementById("audio");
+			sound.play();
+		}
+	</script>
 
-
-
-<script src="js/scriptJeu.js"></script>
+	<script src="js/scriptJeu.js"></script>
 
 </body>
-
 </html>

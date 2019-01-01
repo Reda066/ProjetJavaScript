@@ -6,8 +6,6 @@ var sound = new Howl({
 });
 
 differences = function () {
-
-
   //style des figures
   couleurs = ["red", "green", "blue"];
   style = ["fill", "width", "height", "stroke", "stroke-width"];
@@ -16,7 +14,6 @@ differences = function () {
   // initialise nb erreur nb elements
   nbrErreurs = 5;
   nbrElements = 10;
-
 
   var erreursTrouvées;
   index = 0;
@@ -28,11 +25,9 @@ differences = function () {
     return Math.round(Math.random() * 1000000000) % (max - min + 1) + min;
   }
 
-
   //classe qui genere un Polygone
   class Polygone {
     constructor() {
-
       var opacity = myRandom(10, 100) / 100;
 
       //Creation d'un polygone créé à partir d'un script en ligne situé sur le site w3.org
@@ -49,13 +44,10 @@ differences = function () {
     }
   }
 
-
   //classe qui genere l'Ellipse
   class Ellipse {
     constructor() {
-
       var opacity = myRandom(10, 100) / 100;
-
       var ellipse = document.createElementNS("http://www.w3.org/2000/svg", 'ellipse');
       ellipse.setAttribute("cx", myRandom(1, 400));
       ellipse.setAttribute("cy", myRandom(1, 400));
@@ -76,7 +68,6 @@ differences = function () {
 
     constructor() {
       var opacity = myRandom(10, 100) / 100;
-
       var cercle = document.createElementNS("http://www.w3.org/2000/svg", 'circle');
       cercle.setAttribute("cx", myRandom(0, 400));
       cercle.setAttribute("cy", myRandom(1, 400));
@@ -198,15 +189,13 @@ differences = function () {
       differences.erreursTrouvées = 0;
 
       //Permet à l'utilisateur par un double click de sélectionner l'erreur
-      f.addEventListener("dblclick", vérifierErr, true);
+      f.addEventListener("click", vérifierErr, false);
 
       continue;
     }
 
     document.getElementById("SVG").appendChild(svg1);
   }
-
-
 
   function vérifierErr() {
 
@@ -222,19 +211,19 @@ differences = function () {
       //On compte les nb d'erreurs trouvées
       differences.erreursTrouvées += 1;
       alert('Il vous reste ' + (parseInt(differences.nbrErreurs) - parseInt(differences.erreursTrouvées)) + ' forme(s) géométrique(s) à trouver.');
-      document.getElementById('infos').innerHTML = differences.nbrElements + ' formes.</br>' + differences.erreursTrouvées + '/' + differences.nbrErreurs + ' erreurs. </br>';
+      document.getElementById('infos').innerHTML = differences.nbrElements + ' formes.&nbsp&nbsp&nbsp&nbsp&nbsp' + differences.erreursTrouvées + '/' + differences.nbrErreurs + ' erreurs.&nbsp&nbsp&nbsp&nbsp&nbsp';
       this.erreur = 0;
       // Si l'utilisateur trouve la forme faussée, celle-ci disparait
       svg1.removeChild(this);
       // score
       differences.score += 1;
-      document.getElementById('score').innerHTML = "<br>Score : " + differences.score + "<br>";
+      document.getElementById('score').innerHTML = "Score : " + differences.score;
     }
   }
 
   //Si le temps est dépassé on arrête le jeu
   function arreter() {
-    document.getElementById("temps").innerHTML = temps + " secondes restantes.";
+    document.getElementById("temps").innerHTML = temps + " secondes restantes.&nbsp&nbsp&nbsp&nbsp&nbsp";
     temps--;
 
     if (temps == 0) {
@@ -243,6 +232,7 @@ differences = function () {
       window.location.reload();
     }
   }
+
   //gestion des niveaux par formulaire avec difficulté augmentée
   function level() {
     e = document.getElementById("niveau");
@@ -272,28 +262,23 @@ differences = function () {
   return {
 
     genererSVG: function () {
-
-
-
       sound.play();
-
       differences.score = 0;
-
       level();
       intervalID = window.setInterval(arreter, 1000);
 
-
       svg = document.createElementNS("http://www.w3.org/2000/svg", 'svg');
-      svg.setAttribute("width", 500);
-      svg.setAttribute("height", 500);
+      svg.setAttribute("width", 600);
+      svg.setAttribute("height", 600);
 
       genererElements();
 
       dupliquer();
 
-      document.getElementById('infos').innerHTML = differences.nbrElements + ' formes.</br>' + differences.erreursTrouvées + '/' + differences.nbrErreurs + ' erreurs. </br>';
-      document.getElementById('nom').innerHTML = "Bonjour " + document.getElementById('txtNom').value + "<br>";
-      document.getElementById('boxInfos').hidden = false;
+      document.getElementById('infos').innerHTML = differences.nbrElements + ' formes.&nbsp&nbsp&nbsp&nbsp&nbsp' + differences.erreursTrouvées + '/' + differences.nbrErreurs + ' erreurs.&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp';
+      document.getElementById('nom').innerHTML = "Bonjour " + document.getElementById('txtNom').value + "&nbsp&nbsp&nbsp&nbsp&nbsp";
+      document.getElementById('boxInfos').style.visibility = "visible";
+      document.getElementById('divForm').style.display = 'none';
     }
   };
 }();
