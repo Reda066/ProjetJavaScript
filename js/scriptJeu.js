@@ -1,11 +1,21 @@
 
 //window.onload = init;
-
 var sound = new Howl({
   src: ['./assets/musique/musique.mp3']
 });
 
+var sound2 = new Howl({
+  src: ['http://www.soundjay.com/button/beep-07.wav']
+});
+/*
+var fail = new Howl({
+  src: ['http://www.soundjay.com/button/fail.wav']
+});
+*/
+
+
 differences = function () {
+
   //style des figures
   couleurs = ["red", "green", "blue"];
   style = ["fill", "width", "height", "stroke", "stroke-width"];
@@ -220,6 +230,7 @@ differences = function () {
       document.getElementById('score').innerHTML = "Score : " + differences.score;
     }
   }
+  
 
   //Si le temps est dépassé on arrête le jeu
   function arreter() {
@@ -232,6 +243,8 @@ differences = function () {
       window.location.reload();
     }
   }
+
+  
 
   //gestion des niveaux par formulaire avec difficulté augmentée
   function level() {
@@ -257,12 +270,25 @@ differences = function () {
 
     }
   }
+  function clickson()
+  {
+    var p = document.getElementById("SVG");
+    //if vrai... if faux fail
+    p.onclick = bip;
+  };
+  
+  function bip()
+  {
+    sound2.play();
+  }
+
 
 
   return {
 
     genererSVG: function () {
       sound.play();
+      clickson();
       differences.score = 0;
       level();
       intervalID = window.setInterval(arreter, 1000);
