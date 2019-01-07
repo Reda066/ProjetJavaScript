@@ -1,18 +1,38 @@
-
 //window.onload = init;
 var sound = new Howl({
-  src: ['./assets/musique/musique.mp3']
+  src: ['./assets/musique/musique.wav']
 });
 
 var sound2 = new Howl({
   src: ['http://www.soundjay.com/button/beep-07.wav']
 });
-/*
-var fail = new Howl({
-  src: ['http://www.soundjay.com/button/fail.wav']
-});
-*/
 
+
+//var bienvenue = new Howl({
+  //src: ['./assets/musique/bienvenue.wav']
+//});
+
+var wrong = new Howl({
+  src: ['./assets/musique/wrong_answer.wav']
+});
+
+var game_over = new Howl({
+  src: ['./assets/musique/game_over.wav']
+});
+
+
+var perdu_recommencer = new Howl({
+  src: ['./assets/musique/perdu_recommencer.wav']
+});
+
+var a_toi_de_jouer = new Howl({
+  src: ['./assets/musique/a_toi_de_jouer.wav']
+});
+
+
+var bien_joue = new Howl({
+  src: ['./assets/musique/bien_joue.wav']
+});
 
 differences = function () {
 
@@ -156,29 +176,34 @@ differences = function () {
       f.setAttribute("stroke", couleurs[myRandom(0, 2)]);
       f.setAttribute("x2", myRandom(0, 400));
       f.setAttribute("y2", myRandom(0, 400));
+      f.setAttribute("class","faux");
     }
     if (f.tagName == "rect") {
       f.setAttribute("fill", couleurs[myRandom(0, 2)]);
       f.setAttribute("stroke", couleurs[myRandom(0, 2)]);
       f.setAttribute("width", myRandom(10, 50));
       f.setAttribute("height", myRandom(10, 50));
+      f.setAttribute("class","faux");
     }
 
     if (f.tagName == "circle") {
       f.setAttribute("stroke", couleurs[myRandom(0, 2)]);
       f.setAttribute("r", myRandom(1, 100));
       f.setAttribute("fill", couleurs[myRandom(0, 2)]);
+      f.setAttribute("class","faux");
     }
     if (f.tagName == "ellipse") {
       f.setAttribute("rx", myRandom(1, 100));
       f.setAttribute("ry", myRandom(1, 100));
       f.setAttribute("stroke", couleurs[myRandom(0, 2)]);
       f.setAttribute("fill", "rgb(" + myRandom(0, 255) + "," + myRandom(0, 255) + "," + myRandom(0, 255) + ")");
+      f.setAttribute("class","faux");
     }
 
     if (f.tagName == "polygon") {
       f.setAttribute("stroke", couleurs[myRandom(0, 2)]);
       f.setAttribute("fill", "rgb(" + myRandom(0, 255) + "," + myRandom(0, 255) + "," + myRandom(0, 255) + ")");
+      f.setAttribute("class","faux");
     }
   }
 
@@ -213,24 +238,44 @@ differences = function () {
 
       //On compare le nb d'erreur avec le nb d'erreur trouvé si elles sont égales alert
       if (parseInt(differences.erreursTrouvées) == (parseInt(differences.nbrErreurs) - 1)) {
-        alert('BRAVO ! Vous avez trouvé toutes les erreurs !');
-        alert("Fin du jeu. Cliquez sur OK pour y rejouer une nouvelle fois. ;)");
+       // alert('BRAVO ! Vous avez trouvé toutes les erreurs !');
+       sound.pause();
+       bien_joue.play(); 
+       alert("Fin du jeu. Cliquez sur OK pour y rejouer une nouvelle fois. ;)");
         window.location.reload();
         return;
       }
       //On compte les nb d'erreurs trouvées
-      differences.erreursTrouvées += 1;
-      alert('Il vous reste ' + (parseInt(differences.nbrErreurs) - parseInt(differences.erreursTrouvées)) + ' forme(s) géométrique(s) à trouver.');
-      document.getElementById('infos').innerHTML = differences.nbrElements + ' formes.&nbsp&nbsp&nbsp&nbsp&nbsp' + differences.erreursTrouvées + '/' + differences.nbrErreurs + ' erreurs.&nbsp&nbsp&nbsp&nbsp&nbsp';
-      this.erreur = 0;
-      // Si l'utilisateur trouve la forme faussée, celle-ci disparait
-      svg1.removeChild(this);
-      // score
-      differences.score += 1;
-      document.getElementById('score').innerHTML = "Score : " + differences.score;
+
+      //var t=0;
+      //if(this)
+      //{
+        var p = this;
+        p = sound2.play();
+        svg1.removeChild(this);
+        //t=1;
+
+        differences.erreursTrouvées += 1;
+
+      
+        document.getElementById('infos').innerHTML = differences.nbrElements + ' formes.&nbsp&nbsp&nbsp&nbsp&nbsp' + differences.erreursTrouvées + '/' + differences.nbrErreurs + ' erreurs.&nbsp&nbsp&nbsp&nbsp&nbsp';
+        this.erreur = 0;
+  
+        // Si l'utilisateur trouve la forme faussée, celle-ci disparait
+      
+        alert('Il vous reste ' + (parseInt(differences.nbrErreurs) - parseInt(differences.erreursTrouvées)) + ' forme(s) géométrique(s) à trouver.');
+  
+        // score
+        differences.score += 1;
+        document.getElementById('score').innerHTML = "Score : " + differences.score;
+        
+       ////////////////////////////On cherche à identifier l'element avec l erreur , création d'une classe faux, mais ne marche pas lorsqu'on l' appelle
+  //test = document.getElementById("SVG");
+  //test = wrong.play();
+
     }
   }
-  
+
 
   //Si le temps est dépassé on arrête le jeu
   function arreter() {
@@ -238,13 +283,18 @@ differences = function () {
     temps--;
 
     if (temps == 0) {
+     
+      sound.pause();
+      game_over.play();
+
       alert("Le temps imparti s'est écoulé.");
+      perdu_recommencer.play();
       alert("Fin du jeu. Cliquez sur OK pour y rejouer une nouvelle fois. ;)");
       window.location.reload();
     }
   }
 
-  
+
 
   //gestion des niveaux par formulaire avec difficulté augmentée
   function level() {
@@ -254,7 +304,6 @@ differences = function () {
       differences.nbrErreurs = 5;
       differences.nbrElements = 10;
       temps = parseInt(nbrErreurs) * 10;
-
     }
     if (e.options[e.selectedIndex].value == "niveau2") {
       differences.nbrErreurs = 6;
@@ -270,25 +319,20 @@ differences = function () {
 
     }
   }
-  function clickson()
+  /*function clickson()
   {
     var p = document.getElementById("SVG");
     //if vrai... if faux fail
     p.onclick = bip;
-  };
-  
-  function bip()
-  {
-    sound2.play();
-  }
+  };*/
 
 
 
   return {
 
     genererSVG: function () {
+      a_toi_de_jouer.play();
       sound.play();
-      clickson();
       differences.score = 0;
       level();
       intervalID = window.setInterval(arreter, 1000);
@@ -311,5 +355,5 @@ differences = function () {
 
 
 //function init() {
-  document.getElementById('start').addEventListener("click", differences.genererSVG, true);
+document.getElementById('start').addEventListener("click", differences.genererSVG, true);
 //}
