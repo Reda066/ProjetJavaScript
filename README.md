@@ -27,7 +27,7 @@
   
   * module pour générer la musique de fond et lors d'un clique.
   
-  * module de fin de partie affichant les erreurs si le joueur ne les a pas trouvés
+  * module affichant le nombre d'erreurs restantes par des étoiles.
   
 ## Comment Jouer ?
 
