@@ -267,7 +267,8 @@ differences = function () {
   
         // score
         differences.score += 1;
-        document.getElementById('score').innerHTML = "Score : " + differences.score;
+        // colorer l'etoile selon le score 
+        document.getElementById(differences.score).setAttribute('class','fa fa-star checked');
         
        ////////////////////////////On cherche à identifier l'element avec l erreur , création d'une classe faux, mais ne marche pas lorsqu'on l' appelle
   //test = document.getElementById("SVG");
@@ -304,11 +305,26 @@ differences = function () {
       differences.nbrErreurs = 5;
       differences.nbrElements = 10;
       temps = parseInt(nbrErreurs) * 10;
+      // dessiner les etoiles 
+      for (var i = 0; i < differences.nbrErreurs; i++) {
+        var x = document.createElement("span");
+        x.setAttribute('class','fa fa-star');
+        x.setAttribute('id',i+1);
+        document.getElementById('boxInfos').appendChild(x);
+      }
+      
     }
     if (e.options[e.selectedIndex].value == "niveau2") {
       differences.nbrErreurs = 6;
       differences.nbrElements = 15;
       temps = parseInt(nbrErreurs) * 11;
+      // dessiner les etoiles 
+            for (var i = 0; i < differences.nbrErreurs; i++) {
+        var x = document.createElement("span");
+        x.setAttribute('class','fa fa-star');
+        x.setAttribute('id',i+1);
+        document.getElementById('boxInfos').appendChild(x);
+      }
 
     }
 
@@ -316,6 +332,13 @@ differences = function () {
       differences.nbrErreurs = 7;
       differences.nbrElements = 20;
       temps = parseInt(nbrErreurs) * 12;
+      // dessiner les etoiles 
+            for (var i = 0; i < differences.nbrErreurs; i++) {
+        var x = document.createElement("span");
+        x.setAttribute('class','fa fa-star');
+        x.setAttribute('id',i+1);
+        document.getElementById('boxInfos').appendChild(x);
+      }
 
     }
   }
