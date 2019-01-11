@@ -1,4 +1,3 @@
-//window.onload = init;
 var sound = new Howl({
   src: ['./assets/musique/musique.wav']
 });
@@ -6,11 +5,6 @@ var sound = new Howl({
 var sound2 = new Howl({
   src: ['http://www.soundjay.com/button/beep-07.wav']
 });
-
-
-//var bienvenue = new Howl({
-  //src: ['./assets/musique/bienvenue.wav']
-//});
 
 var wrong = new Howl({
   src: ['./assets/musique/wrong_answer.wav']
@@ -28,7 +22,6 @@ var perdu_recommencer = new Howl({
 var a_toi_de_jouer = new Howl({
   src: ['./assets/musique/a_toi_de_jouer.wav']
 });
-
 
 var bien_joue = new Howl({
   src: ['./assets/musique/bien_joue.wav']
@@ -238,23 +231,18 @@ differences = function () {
 
       //On compare le nb d'erreur avec le nb d'erreur trouvé si elles sont égales alert
       if (parseInt(differences.erreursTrouvées) == (parseInt(differences.nbrErreurs) - 1)) {
-       // alert('BRAVO ! Vous avez trouvé toutes les erreurs !');
+       
+      //Musique en pause et appel de l'audio bien joue
        sound.pause();
        bien_joue.play(); 
        alert("Fin du jeu. Cliquez sur OK pour y rejouer une nouvelle fois. ;)");
         window.location.reload();
         return;
       }
-      //On compte les nb d'erreurs trouvées
-
-      //var t=0;
-      //if(this)
-      //{
+      //On compte les nb d'erreurs trouvées, et un son est joué lors du click sur l'erreur
         var p = this;
         p = sound2.play();
         svg1.removeChild(this);
-        //t=1;
-
         differences.erreursTrouvées += 1;
 
       
@@ -267,12 +255,9 @@ differences = function () {
   
         // score
         differences.score += 1;
-        document.getElementById('score').innerHTML = "Score : " + differences.score;
+        // colorer l'etoile selon le score 
+        document.getElementById(differences.score).setAttribute('class','fa fa-star checked');
         
-       ////////////////////////////On cherche à identifier l'element avec l erreur , création d'une classe faux, mais ne marche pas lorsqu'on l' appelle
-  //test = document.getElementById("SVG");
-  //test = wrong.play();
-
     }
   }
 
@@ -283,11 +268,12 @@ differences = function () {
     temps--;
 
     if (temps == 0) {
-     
+     //Musique en pause et appel de l'audio game over
       sound.pause();
       game_over.play();
 
       alert("Le temps imparti s'est écoulé.");
+      // Appel de l'audio recommencer lorsque le joueur perd
       perdu_recommencer.play();
       alert("Fin du jeu. Cliquez sur OK pour y rejouer une nouvelle fois. ;)");
       window.location.reload();
@@ -304,11 +290,26 @@ differences = function () {
       differences.nbrErreurs = 5;
       differences.nbrElements = 10;
       temps = parseInt(nbrErreurs) * 10;
+      // dessiner les etoiles 
+      for (var i = 0; i < differences.nbrErreurs; i++) {
+        var x = document.createElement("span");
+        x.setAttribute('class','fa fa-star');
+        x.setAttribute('id',i+1);
+        document.getElementById('boxInfos').appendChild(x);
+      }
+      
     }
     if (e.options[e.selectedIndex].value == "niveau2") {
       differences.nbrErreurs = 6;
       differences.nbrElements = 15;
       temps = parseInt(nbrErreurs) * 11;
+      // dessiner les etoiles 
+            for (var i = 0; i < differences.nbrErreurs; i++) {
+        var x = document.createElement("span");
+        x.setAttribute('class','fa fa-star');
+        x.setAttribute('id',i+1);
+        document.getElementById('boxInfos').appendChild(x);
+      }
 
     }
 
@@ -316,31 +317,35 @@ differences = function () {
       differences.nbrErreurs = 7;
       differences.nbrElements = 20;
       temps = parseInt(nbrErreurs) * 12;
+      // dessiner les etoiles 
+            for (var i = 0; i < differences.nbrErreurs; i++) {
+        var x = document.createElement("span");
+        x.setAttribute('class','fa fa-star');
+        x.setAttribute('id',i+1);
+        document.getElementById('boxInfos').appendChild(x);
+      }
 
     }
   }
-  /*function clickson()
-  {
-    var p = document.getElementById("SVG");
-    //if vrai... if faux fail
-    p.onclick = bip;
-  };*/
-
-
 
   return {
 
     genererSVG: function () {
+      //Appel des audio
       a_toi_de_jouer.play();
       sound.play();
+
+      //Initialisation score,lvl
       differences.score = 0;
       level();
       intervalID = window.setInterval(arreter, 1000);
 
+      //création de la surface de jeu
       svg = document.createElementNS("http://www.w3.org/2000/svg", 'svg');
       svg.setAttribute("width", 600);
       svg.setAttribute("height", 600);
 
+      //appel des fonctions pour gérer les éléments
       genererElements();
 
       dupliquer();
